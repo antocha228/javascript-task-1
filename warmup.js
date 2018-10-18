@@ -30,12 +30,13 @@ function centuryByYearProblem(year) {
         throw new RangeError();
     }
     let startYear = year % 100;
+    let age = year / 100;
 
     if (startYear === 0) {
-        return Math.trunc(year / 100);
+        return Math.trunc(age);
     }
 
-    return Math.trunc(year / 100) + 1;
+    return Math.trunc(age) + 1;
 }
 
 /**
@@ -51,7 +52,7 @@ function colorsProblem(hexColor) {
         throw new TypeError();
     }
 
-    const hexRegexp = /^#([A-Fa-f0-9]{2}){3}$/;
+    const hexRegexp = /^#([A-Fa-f\d]{2}){3}$/;
 
     if (!hexRegexp.test(hexColor)) {
         throw new RangeError();
@@ -124,7 +125,7 @@ function numberSystemProblem(n, targetNs) {
         throw new RangeError();
     }
 
-    return n.toString(targetNs).toLowerCase();
+    return n.toString(targetNs);
 }
 
 /**
@@ -138,7 +139,7 @@ function phoneProblem(phoneNumber) {
         throw new TypeError();
     }
 
-    let str = /^8-800-[0-9]{3}-[0-9]{2}-[0-9]{2}/;
+    let str = /^8-800-\d{3}(-\d{2}){2}/;
 
     let phoneMatch = phoneNumber.match(str);
     if (phoneMatch) {
@@ -163,7 +164,7 @@ function smilesProblem(text) {
     let pattern = /:-\)|\(-:/g;
     let smileMatch = text.match(pattern);
 
-    if (smileMatch === null) {
+    if (!smileMatch) {
         return 0;
     }
 
